@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+
 const Button =({ handleClick, text })=> (
   <button onClick={handleClick}>
     {text}
@@ -70,22 +71,4 @@ export default App;
 
 
 
- /* <div>
-Good: {props.good} 
-</div>
-<div>
-Bad: {props.bad} 
-</div>
-<div>
-Neutral: {props.neutral} 
-</div>
 
-<div>
-all: {all} 
-</div>
-<div>
-Average: {average} 
-</div>
-<div>
-Positive: {positive} 
-</div> */
