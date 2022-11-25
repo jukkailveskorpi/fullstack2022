@@ -1,14 +1,19 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Person from './components/Person';
-import Filter from './components/Filter';
 import './App.css';
 
 const App =(props)=> {
- const [persons, setPersons] = useState(props.persons)
+ const [persons, setPersons] = useState('')
+/* ([
+  { name: 'Arto Hellas', number: '040-123456' },
+  { name: 'Ada Lovelace', number: '39-44-5323523' },
+  { name: 'Dan Abramov', number: '12-43-234345' },
+  { name: 'Mary Poppendieck', number: '39-23-6423122' }
+]) */
  const [newPerson, setNewPerson] = useState ('')
  const [newNumber, setNewNumber] = useState ('')
  const [filter, setFilter] = useState("");
- const [filteredPersons, setFilteredPersons] = useState(null);
+ //const [filteredPersons, setFilteredPersons] = useState(null);
 
 // const checkPerson = () => persons.some(a => a.name === newPerson)
 // const checkPerson = persons.find(( {name} ) => name === newPerson) 
@@ -39,13 +44,22 @@ const App =(props)=> {
  }
  }
 
- const handleFilter =(event)=> {
+ const handleFilterChange =(event)=> {
   setFilter(event.target.value);
-  const filtered = persons.filter((person) => 
-  person.name.toLowerCase().includes(event.target.value.toLowerCase())
-  );
-  setFilteredPersons(filtered)
+  //const filtered = persons.filter((person) => 
+  //person.name.toLowerCase().includes(event.target.value.toLowerCase())
+  //);
+  //setFilteredPersons(filtered)
  }
+
+ const personsToShow = filter ===""
+  ? persons
+  : persons.filter(person =>
+      person.name.toLowerCase().includes(filter.toLowerCase())) 
+      const row_names =()=> personsToShow.map(person => 
+        <p key={person.name}>{person.name} {person.number}</p>
+        )
+    
 
  const handleNewPerson = (event) => {
   setNewPerson(event.target.value)
@@ -59,26 +73,16 @@ return (
 <div>
     <h1>Phonebook</h1>
     <div>
-    <p>Filter shown with  <input type="text" value={filter} onChange={handleFilter}/></p>
-    <ul>
+    Filter shown with  <input value={filter} onChange={handleFilterChange}/>
    
-       
-    <Filter filter={filter} />
- 
-    </ul>
     </div>
-    <ul>
-      {persons.map(person => 
-         <Person key={person.id} person={person} />
-         )}  
-    </ul>  
     <form onSubmit={addPerson}>
-     <div> name <input 
-        value={newPerson}
-        onChange={handleNewPerson}
-      /> </div>
+     <div> name : <input value={newPerson}
+                  onChange={handleNewPerson}
+       />
+      </div>
       <div>
-       number <input 
+       <h2>number </h2><input 
         value={newNumber}
         onChange={handleNewNumber}
       /> </div>
@@ -91,6 +95,12 @@ return (
 }
 
 export default App;
+
+/* <ul>
+      {persons.map(person => 
+         <Person key={person.id} person={person} />
+         )}  
+    </ul> */  
 
 /*import React from "react";
 
