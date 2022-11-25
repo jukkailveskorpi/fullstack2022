@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import Person from './components/Person';
+import Filter from './components/Filter';
 import './App.css';
 
 const App =(props)=> {
  const [persons, setPersons] = useState(props.persons)
  const [newPerson, setNewPerson] = useState ('')
  const [newNumber, setNewNumber] = useState ('')
- const [filter, setFilter] = useState(null);
+ const [filter, setFilter] = useState("");
  const [filteredPersons, setFilteredPersons] = useState(null);
 
 // const checkPerson = () => persons.some(a => a.name === newPerson)
@@ -38,17 +39,7 @@ const App =(props)=> {
  }
  }
 
-/* const handleFilter = (event) => {
-  setFilter(event.target.value);
-  const filtered = persons.filter((person) =>
-    // Check if the search term is included in the names in the phonebook
-    person.name.toLowerCase().includes(event.target.value.toLowerCase())
-  );
-  setFilteredPersons(filtered);
-}; */
-
-
- const handleNewFilter =(event)=> {
+ const handleFilter =(event)=> {
   setFilter(event.target.value);
   const filtered = persons.filter((person) => 
   person.name.toLowerCase().includes(event.target.value.toLowerCase())
@@ -64,24 +55,16 @@ const App =(props)=> {
   setNewNumber(event.target.value)
  }
 
-  /* <InputField
-        label="Filter shown with"
-        htmlFor="filter"
-        type="text"
-        value={filter}
-        onChange={handleFilter}
-      /> */
-
 return (
 <div>
     <h1>Phonebook</h1>
     <div>
-    <p>Filter shown with  <input type="text" value={filter} onChange={handleNewFilter}/></p>
+    <p>Filter shown with  <input type="text" value={filter} onChange={handleFilter}/></p>
     <ul>
-    <li>
+   
        
-       <Filter filtered={filtered} onChange={handleFilterChange} /> 
-    </li>
+    <Filter filter={filter} />
+ 
     </ul>
     </div>
     <ul>
